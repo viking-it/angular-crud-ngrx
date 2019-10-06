@@ -1,0 +1,27 @@
+<div class="mt-4 ml-4 mr-4">
+	<h3>Добавить продукт</h3>
+
+	<form [formGroup]="productForm" (submit)="createProduct()" class="form-inline mb-4">
+		<div class="form-group">
+			<label class="sr-only" for="Name">Наименование</label>
+			<div class="input-group mb-2 mr-sm-2">
+			  <input type="text" class="form-control" formControlName="name" placeholder="Наименование">
+			</div>
+
+			<label class="sr-only" for="Price">Цена</label>
+			<div class="input-group mb-2 mr-sm-2">
+			  <input type="text" class="form-control" formControlName="price" placeholder="Цена">
+			</div>
+
+			<button type="submit" class="btn btn-primary mb-2 mr-2">Добавить</button>
+		</div>
+	</form>
+	
+	<div class="alert alert-danger" *ngIf="productForm.get('name').hasError('required') && productForm.get('name').touched">  
+		Поле наименование обязательно к заполнению 
+	</div>
+			
+	<div class="alert alert-danger" *ngIf="(productForm.get('price').hasError('required') || productForm.get('price').hasError('pattern')) && productForm.get('price').touched">  
+		Поле цена обязательно к заполнению и должно состоять из цифр в формате 00,00
+	</div>   	
+</div>  
