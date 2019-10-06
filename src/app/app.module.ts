@@ -16,6 +16,7 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
+import { ApiInterceptor } from './api.interceptor';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NavbarComponent } from "./navbar/navbar.component";
     AppRoutingModule
   ],
   providers: [
-    { provide: RouterStateSerializer, useClass: CustomSerializer }
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+	{ provide: RouterStateSerializer, useClass: CustomSerializer }
   ],
   bootstrap: [AppComponent]
 })
